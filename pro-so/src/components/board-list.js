@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 class BoardList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {value: ''}
   }
+
+  // componentWillMount() {
+  //   if(!this.props.activeBoard){
+  //     console.log('none');
+  //     return
+  //   }
+  //   // this.setState({value: this.props.activeBoard.id})
+  // }
 
   componentWillReceiveProps(nextProps) {
     if(this.props.activeBoard && nextProps) {
@@ -31,7 +39,7 @@ class BoardList extends React.Component {
     return(
       <div className='boardList'>
         <form >
-            <label> Create Board first before Notes and Images:
+            <label> Current Board In Use:
             <select  value={this.state.value} onChange={this.handleChange.bind(this)}>
               {this.props.boards.map(this.eachBoard, this)}
             </select>

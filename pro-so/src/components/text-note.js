@@ -1,19 +1,24 @@
 import React, { Component } from 'react'
 import Draggable from 'react-draggable'
+// import { ColorPicker } from 'react-color'
 import ColorPicker from './color-picker'
 
 class TextNote extends Component {
+  constructor(props){
+    super(props)
+  }
+
   componentDidUpdate() {
     if (this.props.editing) {
-        this.newText.focus()
-        this.newText.select()
+        this.refs.newText.focus()
+        this.refs.newText.select()
     }
   }
 
   _handleKeyPress(e) {
-    if (e.key === "Enter") {
-      this.save();
-    }
+    if(e.key === 'Enter'){
+      return this.save()
+    } 
   }
 
   edit() {
@@ -21,7 +26,7 @@ class TextNote extends Component {
   }
 
   save() {
-    this.props.onTxtNoteSave(this.newText.value, this.props.id)
+    this.props.onTxtNoteSave(this.refs.newText.value, this.props.id)
     this.props.onTxtNoteToggle(this.props.id)
   }
 
@@ -38,12 +43,12 @@ class TextNote extends Component {
   }
 
   editMode() {
-    const colors = ['#DB3E00', '#FCCB00', '#008B02', '#1273DE', '#5300EB'] 
-    const style = { borderTop: `7px solid ${this.props.color}`} 
+    const colors = ['#DB3E00', '#FCCB00', '#008B02', '#1273DE', '#5300EB'] //default swatches for color picker
+    const style = { borderTop: `7px solid ${this.props.color}`} //highlight color at the top of note
     return(
       <div className="textNoteEditContainer">
         <div style={style} className="textNoteEdit">
-          <textarea ref="newText" defaultValue={this.props.note} onKeyDown={this._handleKeyPress.bind(this)}></textarea>
+          <textarea ref="newText" defaultValue={this.props.note} onKeyPress={this._handleKeyPress.bind(this)}></textarea>
           <button onClick={() => this.save()}> Save </button>
         </div>
         <div className="colorPicker">
@@ -54,7 +59,7 @@ class TextNote extends Component {
   }
 
   displayMode() {
-    const style = { borderTop: `7px solid ${this.props.color}`} 
+    const style = { borderTop: `7px solid ${this.props.color}`} //highlight color at the top of note
     return (
       <div style={style} className="textNoteDisplay" >
         <p onDoubleClick={() => this.edit()} title="Double click to edit">{this.props.note}</p>

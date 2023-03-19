@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 const MenuBar = (props) => {
   return(
@@ -7,7 +7,7 @@ const MenuBar = (props) => {
         <li onClick={props.addBoard}> + Board </li>
         <li onClick={() => props.deleteBoard(props.activeBoard.id)}> - Board </li>
         <li onClick={() => props.onAddTxtNote('text')}> + Note </li>
-        <li onClick={() => props.onAddImgNote('image')}> + Image Note </li>
+        <li onClick={() => props.onAddImgNote('image')}> + Image Note</li>
       </ul>
     </div>
   )

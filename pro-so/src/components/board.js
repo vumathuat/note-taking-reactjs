@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
+import MenuBar from './menu-bar'
 import TextNote from './text-note'
 import ImageNote from './image-note'
 
 class Board extends Component {
+  constructor(props) {
+    super(props)
+  }
+
   eachNote(txtNote) {
     return (<TextNote
               key={txtNote.id}
@@ -39,7 +44,7 @@ class Board extends Component {
     return (
       <div>
         {
-          !this.props.activeBoard ? '' : 
+          !this.props.activeBoard ? '' : //no board available to render
 
           <div className="board" style={{height: '100vh', width: '100%', position: 'relative', padding: '10px'}}>
             {this.props.activeBoard.txtNotes.map(this.eachNote, this)}

@@ -9,15 +9,15 @@ class BoardTitle extends Component {
 
   componentDidUpdate() {
     if (this.state.editing) {
-        this.newTitle.focus()
-        this.newTitle.select()
+        this.refs.newTitle.focus()
+        this.refs.newTitle.select()
     }
   }
 
   _handleKeyPress(e) {
-    if (e.key === "Enter") {
-      this.save();
-    }
+    if(e.key === 'Enter'){
+      return this.save()
+    } 
   }
 
   edit() {
@@ -25,7 +25,7 @@ class BoardTitle extends Component {
   }
 
   save() {
-    this.props.onTitleChange(this.newTitle.value, this.props.activeBoard.id)
+    this.props.onTitleChange(this.refs.newTitle.value, this.props.activeBoard.id)
     this.setState({editing: false})
   }
 
@@ -33,7 +33,7 @@ class BoardTitle extends Component {
     return(
       <div className="boardTitleEdit">
         <input ref="newTitle" defaultValue={this.props.activeBoard.title}
-                              onKeyDown={this._handleKeyPress.bind(this)}
+                              onKeyPress={this._handleKeyPress.bind(this)}
                               onBlur={this.save.bind(this)}/>
       </div>
     )

@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   nextId() {
-    this.uniqueId = this.uniqueId || 0 
+    this.uniqueId = this.uniqueId || 0 //first element gets 1 and uniqueId gets set to 0.
     return this.uniqueId++;
   }
 
@@ -30,7 +30,7 @@ class App extends Component {
     var boards = [...this.state.boards,
     {
       id: newBoardId,
-      title: `Board ${newBoardId} (Click to Edit)`,
+      title: `Board ${newBoardId}`,
       txtNotes:[],
       imgNotes:[],
       sketchNotes:[]
@@ -40,7 +40,7 @@ class App extends Component {
   }
 
   deleteBoard(id) {
-    if(this.state.boards.length === 1) { return } 
+    if(this.state.boards.length === 1) { return } //always leave one board displayed
     var boards = [...this.state.boards].filter(board => board.id !== id)
     var activeBoard = boards.length === 1 ? boards[0] : boards[boards.length-1]
     this.setState({boards, activeBoard})
@@ -76,7 +76,7 @@ class App extends Component {
     var activeBoard = this.state.activeBoard
     var txtNotes = [...activeBoard.txtNotes,{
           id: this.nextId(),
-          note: 'Drag to move the card to your designed position and Double Click to edit',
+          note: 'Drag to move or Double Click to edit note :)',
           editing: false,
           color: '#db3e00',
           position: {
@@ -100,7 +100,7 @@ class App extends Component {
   onTxtNoteToggle(id){
     var activeBoard = this.state.activeBoard
     var txtNote = this.findTxtNote(id)
-    var currentEditState = txtNote.editing 
+    var currentEditState = txtNote.editing //simplify
     txtNote.editing = !currentEditState
     this.setState({activeBoard})
   }
@@ -168,7 +168,7 @@ class App extends Component {
   onImgNoteToggle(id){
     var activeBoard = this.state.activeBoard
     var imgNote = this.findImgNote(id)
-    var currentEditState = imgNote.editing 
+    var currentEditState = imgNote.editing //simplify
     imgNote.editing = !currentEditState
     this.setState({activeBoard})
   }

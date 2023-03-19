@@ -1,5 +1,5 @@
 import React from 'react'
-import reactCSS from 'reactcss'
+import reactCSS, { handleHover } from 'reactcss'
 import map from 'lodash/map'
 
 import { ColorWrap, Swatch } from 'react-color/lib/components/common'
